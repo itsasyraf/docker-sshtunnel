@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  sshtunnel:
+    build: .
+    container_name: ${PROJECT_NAME}
+    ports:
+      - "${TUNNEL_LOCAL_PORT}:${TUNNEL_LOCAL_PORT}"
+    environment:
+      - KEY=/etc/.ssh/key.pem
+      - TUNNEL_HOST=${TUNNEL_SERVER_USERNAME}@${TUNNEL_SERVER_HOST}
+      - TUNNEL_PORT=${TUNNEL_SERVER_PORT}
+      - LOCAL_PORT=${TUNNEL_LOCAL_PORT}
+      - REMOTE_HOST=${TUNNEL_REMOTE_HOST}
+      - REMOTE_PORT=${TUNNEL_REMOTE_PORT}
+    restart: always
